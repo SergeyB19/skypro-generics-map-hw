@@ -47,5 +47,20 @@ public class EmployeeServiceimpl implements EmployeeService {
     public Collection<Employee> findAll() {
         return Collections.unmodifiableCollection(employees.values());
     }
+
+    @Override
+    public void add(Employee employee) {
+
+    }
+
+    @Override
+    public void remove(Employee employee) {
+
+    }
+
+    @Override
+    public void find(Employee employee) {
+
+    }
 }
 
