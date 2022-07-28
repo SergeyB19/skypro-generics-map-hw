@@ -1,31 +1,32 @@
 package pro.sky.skyprogenericsmaphw.service;
 
+import org.springframework.stereotype.Service;
 import pro.sky.skyprogenericsmaphw.exception.EmployeeAlreadyAddedException;
 import pro.sky.skyprogenericsmaphw.exception.exception.EmployeeNotFoundException;
 import pro.sky.skyprogenericsmaphw.model.Employee;
 import pro.sky.skyprogenericsmaphw.service.service.EmployeeService;
 
 import java.util.*;
-
+@Service
 public class EmployeeServiceimpl implements EmployeeService {
-    private final Map < String, Employee> employees;
+    private  Map < String, Employee> employees;
 
-    public Employee EmployeeServiceimpl(List<Employee> employeeList) throws EmployeeAlreadyAddedException {
+    public void EmployeeServiceimpl(List<Employee> employeeList) throws EmployeeAlreadyAddedException {
         this.employees = new HashMap<>();
-
+    }
 
         @Override
-        public Employee add(String firsName, String lastName){
+        public Employee add(String firstName, String lastName){
             Employee employee = new Employee(firstName, lastName);
             if (employees.containsKey(employee.getFullName())) {
                 throw new EmployeeAlreadyAddedException();
-                return employee;
+//                return employee;
             }
-            employeeList.put(employee.getFullName(),employee);
+            employees.put(employee.getFullName(),employee);
             return employee;
         }
         @Override
-        public Employee remove (String firsName, String lastName){
+        public Employee remove (String firstName, String lastName){
             Employee employee = new Employee(firstName, lastName);
             if (employees.containsKey(employee.getFullName())) {
                return employees.remove(employee.getFullName());
@@ -33,14 +34,14 @@ public class EmployeeServiceimpl implements EmployeeService {
             throw new EmployeeNotFoundException();
         }
         @Override
-        public Employee find (String firsName, String lastName){
+        public Employee find (String firstName, String lastName){
             Employee employee = new Employee(firstName, lastName);
             if (employees.containsKey(employee.getFullName())) {
                 return employees.get(employee.getFullName());
             }
             throw new EmployeeNotFoundException();
         }
-    }
+
 
     @Override
     public Collection<Employee> findAll() {
